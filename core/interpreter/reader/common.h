@@ -3,11 +3,14 @@
 
 #include <stdint.h>
 
-typedef uint8_t stream_flags;
+typedef enum StreamFlags{
+    STREAM_FLAG_VALID = (1 << 7),
+    STREAM_FLAG_INVALID = 0,
+} stream_flags;
 
 typedef struct StreamResult{
     uint8_t payload;
-    stream_flags flags;
+    uint8_t flags;
 } stream_result;
 /*
 Пусть структура флагов такая:

@@ -21,6 +21,6 @@ stream_result file_get_next_val(FILE *file)
     int value = fgetc(file);
     stream_flags flags = 0; 
     if (value != EOF)
-        flags = flags | (1 << 8);
+        flags = flags | STREAM_FLAG_VALID;
     return (stream_result){(uint8_t) value, flags};
 }
