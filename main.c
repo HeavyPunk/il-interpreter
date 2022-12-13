@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "core/interpreter/reader/reader.h"
+#include "core/interpreter/parser/parser.h"
 
 int main(){
     char* script_path = "C:\\Project\\CPP_Labs\\il-interpreter\\hello.il";
@@ -14,7 +15,8 @@ int main(){
     args.args = args_c;
     args.len = 2;
     reader_source_descriptor desc = open_stream(DESCRIPTOR_TYPE_FILE, args);
-    
-    stream_result res = get_from_stream(desc);
+    invocation_context inv_c = parse_until_break(desc);
+
+    // stream_result res = get_from_stream(desc);
     return 0;
 }
