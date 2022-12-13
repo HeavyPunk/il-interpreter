@@ -1,7 +1,10 @@
 CC=gcc
+BUNDLE=interpreter
 
-all:
-	$(CC) main.c ./core/interpreter/operators/LD/ld.c ./core/interpreter/reader/file_reader.c ./core/interpreter/reader/reader.c ../hashmap/map.c -lm
+all: clean
+	$(CC) main.c ./core/interpreter/operators/LD/ld.c ./core/interpreter/reader/file_reader.c ./core/interpreter/reader/reader.c ./core/interpreter/parser/parser.c ./common/utils.c ../hashmap/map.c -o $(BUNDLE)-lm
 
-debug:
-	$(CC) main.c ./core/interpreter/operators/LD/ld.c ./core/interpreter/reader/file_reader.c ./core/interpreter/reader/reader.c ../hashmap/map.c -lm -ggdb
+debug: clean
+	$(CC) main.c ./core/interpreter/operators/LD/ld.c ./core/interpreter/reader/file_reader.c ./core/interpreter/reader/reader.c ./core/interpreter/parser/parser.c ./common/utils.c ../hashmap/map.c -o $(BUNDLE) -lm -ggdb
+
+clean:
