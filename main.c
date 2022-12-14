@@ -15,7 +15,8 @@ int main(){
     args.args = args_c;
     args.len = 2;
     reader_source_descriptor desc = open_stream(DESCRIPTOR_TYPE_FILE, args);
-    invocation_context inv_c = parse_until_break(desc);
+    invocation_context inv_c1 = parse_until_break(desc);
+    invocation_context inv_c2 = parse_until_break(desc);
 
     // stream_result res = get_from_stream(desc);
     return 0;
