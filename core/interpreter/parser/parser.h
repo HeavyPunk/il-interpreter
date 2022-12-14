@@ -6,19 +6,15 @@
 #include "../../context/context.h"
 #include "../../../common/utils.h"
 
-/*
-Include all possible operators
-*/
-#include "../operators/LD/ld.h"
-//----------------------
+typedef enum InvocationContextFlags{
+    INVOCATION_CONTEXT_FLAG_VALID = (1 << 7),
+} invocation_context_flags;
 
-typedef interpreter_context (*operator_handler)(interpreter_context context, string_args args);
-
-typedef struct InvocationContext{
-    operator_handler op_handler;
+typedef struct ParserContext{
     string_args args;
-} invocation_context;
+    uint8_t flags;
+} parser_context;
 
-invocation_context parse_until_break(reader_source_descriptor descriptor);
+parser_context parse_until_break(reader_source_descriptor descriptor);
 
 #endif
