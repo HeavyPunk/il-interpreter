@@ -1,6 +1,6 @@
 #include "parser.h"
 
-invocation_context parse_until_break(reader_source_descriptor descriptor)
+parser_context parse_until_break(reader_source_descriptor descriptor)
 {
     size_t buff_size = 256;
     char delimiters[] = {' ', ','};
@@ -50,8 +50,7 @@ invocation_context parse_until_break(reader_source_descriptor descriptor)
             args.len = raw_args_count;
             free(raw_args);
             free(raw_args_lens);
-            return (invocation_context){
-                .op_handler = NULL,
+            return (parser_context){
                 .args = args,
                 .flags = INVOCATION_CONTEXT_FLAG_VALID
             };
@@ -78,8 +77,9 @@ invocation_context parse_until_break(reader_source_descriptor descriptor)
 
     } while (stream_tmp.flags & STREAM_FLAG_VALID);
     
-    return (invocation_context){
-        .op_handler = NULL,
+    free(raw_args);
+    free(raw_args_lens);
+    return (parser_context){
         .flags = 0
     };
 } 
