@@ -2,7 +2,11 @@
 
 invoker_context invoker_init(){
     hashmap* operators = hashmap_create();
+
     hashmap_set(operators, "LD", sizeof("LD") - 1, (uintptr_t)LD_do);
+    hashmap_set(operators, "LDN", sizeof("LDN") - 1, (uintptr_t)LDN_do);
+    hashmap_set(operators, "ST", sizeof("ST") - 1, (uintptr_t)ST_do);
+
     return (invoker_context){.invoker_operators_cache = operators};
 }
 

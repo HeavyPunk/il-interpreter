@@ -6,6 +6,8 @@
 Include all possible operators
 */
 #include "../operators/LD/ld.h"
+#include "../operators/LDN/ldn.h"
+#include "../operators/ST/st.h"
 //----------------------
 
 typedef interpreter_context (*operator_handler)(interpreter_context context, string_args args);
