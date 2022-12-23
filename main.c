@@ -31,7 +31,7 @@ int main(){
     parser_context parser_c1 = parse_until_break(desc);
     // interpreter_context int_ctx = invoke(int_context, parser_c1, inv_c);
     
-    while (parser_c1.flags && STREAM_FLAG_VALID)
+    while (parser_c1.flags & STREAM_FLAG_VALID)
     { 
         int_context = invoke(int_context, parser_c1, inv_c);
         parser_c1 = parse_until_break(desc);
