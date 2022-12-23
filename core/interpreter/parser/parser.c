@@ -35,7 +35,6 @@ parser_context parse_until_break(reader_source_descriptor descriptor)
                 current_raw_arg = NULL;
                 raw_args_lens[raw_args_count] = arg_len;
                 raw_args_count++;
-                arg_len = 0;
             }
             args.args = malloc(sizeof(string_arg) * raw_args_count);
             for (size_t i = 0; i < raw_args_count; i++){

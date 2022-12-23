@@ -1,6 +1,7 @@
 #ifndef READER_H
 #define READER_H
 
+#include <stdbool.h>
 #include "common.h"
 #include "../../../common/string_arg.h"
 
@@ -14,6 +15,7 @@ typedef enum DescriptorType{
 typedef struct ReaderSourceDescriptor {
     uintptr_t holder;
     descriptor_type type;
+    bool valid;
 } reader_source_descriptor;
 
 

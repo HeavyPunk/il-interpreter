@@ -1,13 +1,13 @@
-#ifndef LD_H
-#define LD_H
+#ifndef MUL_H
+#define MUL_H
 
 #include <inttypes.h>
 #include <stdio.h>
+
 #include "../../../context/context.h"
 #include "../../../../common/string_arg.h"
 #include "../../../../../hashmap/map.h"
-#include "../../../stream/stream.h"
 
-interpreter_context LD_do(interpreter_context context, string_args args);
+interpreter_context MUL_do(interpreter_context context, string_args args);
 
 #endif
