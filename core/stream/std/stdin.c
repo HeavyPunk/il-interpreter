@@ -11,20 +11,18 @@ stream_descriptor stdin_get_descriptor()
 stream_dto stdin_get_payload(size_t len)
 {
     FILE* in_descriptor = freopen(0, "rb", stdin);
-    size_t sz = 0;
-    int stream_data = fgetc(in_descriptor);
-
-    uint8_t* data = malloc(sizeof(uint8_t) * len);
-
-    while (sz < len && EOF != stream_data){
-        data[sz] = (uint8_t)stream_data;
-        sz++;
-        stream_data = fgetc(in_descriptor);
+    size_t sz = len == -1 ? 256 : len;
+    uint8_t* stream_data = malloc(sizeof(uint8_t) * sz);
+    if (!fgets((char*)stream_data, sz, in_descriptor)){
+        free(stream_data);
+        return (stream_dto){
+            .valid = false
+        };
     }
 
     return (stream_dto){
         .len = sz,
-        .valid = sz == len,
-        .payload = data
+        .valid = NULL != stream_data,
+        .payload = stream_data
     };
 }
