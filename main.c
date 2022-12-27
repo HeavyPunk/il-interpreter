@@ -5,6 +5,7 @@
 #include "core/interpreter/parser/parser.h"
 #include "core/interpreter/invoker/invoker.h"
 #include "core/stream/stream.h"
+#include "common/queue/queue.h"
 
 int main(){
     char* script_path = "hello.il";
@@ -27,16 +28,16 @@ int main(){
 
     interpreter_context int_context = {.variables = hashmap_create(), .stream_provider_context = stream_provider_context};
 
-
     parser_context parser_c1 = parse_until_break(desc);
-    // interpreter_context int_ctx = invoke(int_context, parser_c1, inv_c);
     
     while (parser_c1.flags & STREAM_FLAG_VALID)
     { 
         int_context = invoke(int_context, parser_c1, inv_c);
+        if (int_context.error_flags & INTERPRETER_STATE_INTERRUPT_EXECUTION)
+            break;
         parser_c1 = parse_until_break(desc);
     }
-    
     close_stream(desc);
+
     return 0;
 }

@@ -12,6 +12,10 @@ typedef enum ErrorFlagsEnum{
     INTERPRETER_ERROR_INVALID_STREAM = (1 << 4)
 } error_flags;
 
+typedef enum InterpreterStateFlags{
+    INTERPRETER_STATE_INTERRUPT_EXECUTION = (1 << 7)
+} interpreter_state_flags;
+
 typedef struct ILInterpreterContext{
     int64_t register_A;
     hashmap* variables;
@@ -20,6 +24,7 @@ typedef struct ILInterpreterContext{
     stream_provider_context stream_provider_context;
 
     uint8_t error_flags;
+    uint8_t state_flags;
 } interpreter_context;
 
 #endif
