@@ -14,7 +14,6 @@ parser_context parse_until_break(reader_source_descriptor descriptor)
     uint8_t arg_len = 0;
     bool is_comment_flag = 0;
     
-//осталось написать логику перезаписывания аргументов в raw_args
 
     do{
         stream_tmp = get_from_stream(descriptor);
@@ -29,8 +28,10 @@ parser_context parse_until_break(reader_source_descriptor descriptor)
         }
 
         if (is_contains_in_breaks){
-            if (!raw_args_count && !arg_len)
+            if (!raw_args_count && !arg_len){
+                is_comment_flag = 0;
                 continue;
+            }
             if (arg_len){
                 current_raw_arg = NULL;
                 raw_args_lens[raw_args_count] = arg_len;

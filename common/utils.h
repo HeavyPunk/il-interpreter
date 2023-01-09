@@ -7,5 +7,6 @@
 
 bool contains_in(uint8_t item, uint8_t* collection, size_t sz);
 char* normalize_string(char* str, size_t true_sz);
+size_t string_len(uint8_t* str);
 
 #endif

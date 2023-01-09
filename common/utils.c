@@ -16,3 +16,9 @@ char *normalize_string(char *str, size_t true_sz){
         res[i] = str[i];
     return res;
 }
+
+size_t string_len(uint8_t *str){
+    uint8_t i = 0;
+    for (; i < 255 && str[i]; i++);
+    return i % 255;
+}

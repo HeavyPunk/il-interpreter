@@ -5,7 +5,7 @@
 #include "core/interpreter/parser/parser.h"
 #include "core/interpreter/invoker/invoker.h"
 #include "core/stream/stream.h"
-#include "common/queue/queue.h"
+#include "core/var/variables.h"
 
 int main(){
     char* script_path = "hello.il";
@@ -26,16 +26,33 @@ int main(){
     invoker_context inv_c = invoker_init();
 
 
-    interpreter_context int_context = {.variables = hashmap_create(), .stream_provider_context = stream_provider_context};
+    //variables defines
+    hashmap* variables = hashmap_create();
+    variable_descriptor in_stream_variable = {
+        .descriptor = (uintptr_t)"in",
+        .getter = stream_variable_getter,
+        .setter = NULL
+    };
+    variable_descriptor out_stream_variable = {
+        .descriptor = (uintptr_t)"out",
+        .getter = NULL,
+        .setter = stream_variable_setter
+    };
 
-    parser_context parser_c1 = parse_until_break(desc);
+    hashmap_set(variables, "in", sizeof("in") - 1, (uintptr_t)&in_stream_variable);
+    hashmap_set(variables, "out", sizeof("out") - 1, (uintptr_t)&out_stream_variable);
+
+    interpreter_context int_context = {.variables = variables, .stream_provider_context = stream_provider_context};
+
+
+    parser_context parser_ctx = parse_until_break(desc);
     
-    while (parser_c1.flags & STREAM_FLAG_VALID)
+    while (parser_ctx.flags & STREAM_FLAG_VALID)
     { 
-        int_context = invoke(int_context, parser_c1, inv_c);
+        int_context = invoke(int_context, parser_ctx, inv_c);
         if (int_context.error_flags & INTERPRETER_STATE_INTERRUPT_EXECUTION)
             break;
-        parser_c1 = parse_until_break(desc);
+        parser_ctx = parse_until_break(desc);
     }
     close_stream(desc);
 

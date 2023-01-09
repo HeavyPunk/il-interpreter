@@ -4,6 +4,7 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include "../../../context/context.h"
+#include "../../../var/variables.h"
 #include "../../../../common/string_arg.h"
 #include "../../../../../hashmap/map.h"
 #include "../../../stream/stream.h"

@@ -9,7 +9,7 @@ typedef enum ErrorFlagsEnum{
     INTERPRETER_ERROR_OPERATOR_NOT_FOUND = (1 << 7),
     INTERPRETER_ERROR_INVALID_OPERANDS_COUNT = (1 << 6),
     INTERPRETER_ERROR_INVALID_OPERAND = (1 << 5), 
-    INTERPRETER_ERROR_INVALID_STREAM = (1 << 4)
+    INTERPRETER_ERROR_INVALID_VARIABLE = (1 << 4)
 } error_flags;
 
 typedef enum InterpreterStateFlags{
@@ -26,5 +26,6 @@ typedef struct ILInterpreterContext{
     uint8_t error_flags;
     uint8_t state_flags;
 } interpreter_context;
+
 
 #endif
